@@ -26,13 +26,13 @@ public class SignUpController {
 	public String login(String userId, String password, String role) {
 		boolean f = services.authentication(userId, password);
 		
-		if(!f)return "invalid userId or password";
+		if(!f)return "Invalid userId or password";
 		else {
 			
 			boolean roleFlag = services.authorization(userId, role);
 			if(!roleFlag) return "Your not authorized";
 		}
-		return "successfully logined in ";
+		return "Successfully logined in ";
 	}
 	
 }
