@@ -8,13 +8,13 @@ CREATE TABLE `inventory` (
   `order_quantity` bigint NOT NULL,
   `update_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 CREATE TABLE `login` (
   `user_id` varchar(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 
 CREATE TABLE `orders` (
@@ -26,7 +26,7 @@ CREATE TABLE `orders` (
   `order_quantity` bigint DEFAULT NULL,
   `order_status` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 CREATE TABLE `rest_inventor` (
   `location_number` int NOT NULL AUTO_INCREMENT,
@@ -34,7 +34,7 @@ CREATE TABLE `rest_inventor` (
   `material_id` varchar(255) DEFAULT NULL,
   `reset_date` date DEFAULT NULL,
   PRIMARY KEY (`location_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 CREATE TABLE `users` (
   `user_id` varchar(255) NOT NULL,
@@ -44,6 +44,6 @@ CREATE TABLE `users` (
   `phone` varchar(255) DEFAULT NULL,
   `role` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 
