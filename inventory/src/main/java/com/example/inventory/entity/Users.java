@@ -15,7 +15,8 @@ import lombok.Data;
 @Entity
 @Table
 public class Users {
-	 @Id
+	 
+	@Id
 	 
 	 private String userId;
 	 private String name;
@@ -58,6 +59,18 @@ public class Users {
 	}
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+	public Users(String userId, String name, String phone, String email, String role, Date dob) {
+		super();
+		this.userId = userId;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.role = role;
+		this.dob = dob;
+	}
+	public Users() {
+		super();
 	}
 	
 	
