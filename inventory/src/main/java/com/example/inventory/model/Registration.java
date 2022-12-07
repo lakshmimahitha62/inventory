@@ -9,8 +9,17 @@ public class Registration {
 	private String name;
 	 private String phone;
 	private String email;
+	private String role;
 	private Date dob;
 	
+	
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	public String getName() {
 		return name;
 	}
@@ -35,13 +44,16 @@ public class Registration {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	public Registration(String name, String phone, String email, Date dob) {
+	
+	public Registration(String name, String phone, String email,String role, Date dob) {
 		super();
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
 		this.dob = dob;
+		this.role = role;
 	}
+	
 	public Registration() {
 		super();
 	}

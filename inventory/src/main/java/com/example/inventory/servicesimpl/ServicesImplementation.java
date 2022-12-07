@@ -5,11 +5,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.inventory.entity.Inventory;
 import com.example.inventory.entity.Login;
 import com.example.inventory.entity.Orders;
 import com.example.inventory.entity.RestInventor;
 import com.example.inventory.entity.Users;
 import com.example.inventory.model.Registration;
+import com.example.inventory.repos.EditInventoryRepo;
 import com.example.inventory.repos.InventoryRepo;
 import com.example.inventory.repos.LoginRepo;
 import com.example.inventory.repos.OrderRepo;
@@ -28,43 +30,35 @@ public class ServicesImplementation  implements Services{
 	UserRepo userrepo;
 	
 	@Autowired
-	RestInventor restrepo;
+	EditInventoryRepo restrepo;
 	
 	@Autowired
-	OrderRepo repo;
+	OrderRepo orderrepo;
 	
 	@Autowired 
-	InventoryRepo inventor;
+	InventoryRepo inventoryrepo;
+	
 	@Override
-	public boolean authentication(String userId, String password) {
+	public String authentication(Login login) {
 		// TODO Auto-generated method stub
 		
-		Login login = loginrepo.findById(userId).get();
+		Login logindetails = loginrepo.findById(login.getUserId()).get();
 		
-	    if(login.getPassword().equals(password)) {
-	    	return true;
+	    if(logindetails.getPassword().equals(login.getPassword())) {
+	    	return userrepo.findByUserId(logindetails.getUserId()).get().getRole();
 	    }
 		
-		return false;
+		return "Invalid UserId or Password";
 	}
 
-	@Override
-	public boolean authorization(String userId, String userRole) {
-		// TODO Auto-generated method stub
-		Users user = userrepo.findByUserId(userId).get();
-		
-		if(user.getRole().equals(userRole)) return true;
-		
-		
-		return false;
-	}
+	
 
 	@Override
 	public String registration(Registration registration) {
 		// TODO Auto-generated method stub
 		UserIdUtilities useridutil=new UserIdUtilities();
 		String userId=useridutil.generateUserId(userrepo);
-		Users user=new Users(userId,registration.getName(),registration.getPhone(),registration.getEmail(),"user",registration.getDob());
+		Users user=new Users(userId,registration.getName(),registration.getPhone(),registration.getEmail(),registration.getRole(),registration.getDob());
 		userrepo.save(user);
 		return userId;
 	}
@@ -73,13 +67,30 @@ public class ServicesImplementation  implements Services{
 	public boolean editInventory(RestInventor restInventor) {
 		// TODO Auto-generated method stub
 		
-		return false;
+		restrepo.save(restInventor);
+		
+		Inventory inventory = inventoryrepo.findByMaterialNumberAndLocationNumber(restInventor.getMaterialId(), restInventor.getLocationNumber());
+		
+		inventory.setAvailableQuantity(restInventor.getResetQty() - inventory.getOrderQuantity());
+		
+		inventoryrepo.save(inventory);
+		
+		return true;
 	}
 
 	@Override
 	public boolean acceptOrders(Orders orders) {
 		// TODO Auto-generated method stub
-		return false;
+		
+		orderrepo.save(orders);
+		Inventory inventory = inventoryrepo.findByMaterialNumberAndLocationNumber(orders.getMaterialId(),orders.getLocationNumber());
+		
+		inventory.setAvailableQuantity(inventory.getResetQty() - orders.getOrderQuantity());
+		
+		inventoryrepo.save(inventory);
+		
+		return true;
+		
 	}
 
 	@Override
@@ -88,5 +99,4 @@ public class ServicesImplementation  implements Services{
 		return null;
 	}
 
-	
 }

@@ -18,8 +18,8 @@ public class RestInventor {
 	@Id
 	
 	private String materialId;
-	private long ResetQty;
-	private int locationNumber;
+	private Long ResetQty;
+	private Long locationNumber;
 	private java.time.LocalDate resetDate;
 	public String getMaterialId() {
 		return materialId;
@@ -33,10 +33,10 @@ public class RestInventor {
 	public void setResetQty(long resetQty) {
 		ResetQty = resetQty;
 	}
-	public int getLocationNumber() {
+	public Long getLocationNumber() {
 		return locationNumber;
 	}
-	public void setLocationNumber(int locationNumber) {
+	public void setLocationNumber(Long locationNumber) {
 		this.locationNumber = locationNumber;
 	}
 	public java.time.LocalDate getResetDate() {
@@ -45,7 +45,7 @@ public class RestInventor {
 	public void setResetDate(java.time.LocalDate resetDate) {
 		this.resetDate = resetDate;
 	}
-	public RestInventor(String materialId, long resetQty, int locationNumber, LocalDate resetDate) {
+	public RestInventor(String materialId, long resetQty, Long locationNumber, LocalDate resetDate) {
 		super();
 		this.materialId = materialId;
 		ResetQty = resetQty;
