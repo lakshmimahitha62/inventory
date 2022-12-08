@@ -60,6 +60,8 @@ public class ServicesImplementation  implements Services{
 		String userId=useridutil.generateUserId(userrepo);
 		Users user=new Users(userId,registration.getName(),registration.getPhone(),registration.getEmail(),registration.getRole(),registration.getDob());
 		userrepo.save(user);
+		Login login = new Login(userId,registration.getPassword());
+		loginrepo.save(login);
 		return userId;
 	}
 

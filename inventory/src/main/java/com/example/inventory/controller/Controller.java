@@ -26,7 +26,7 @@ public class Controller {
 	@Autowired
 	UserIdUtilities useridutil;
 	@GetMapping("")
-	public String loginMesssage(@RequestBody Login login){
+	public Message loginMesssage(@RequestBody Login login){
 		return login(login);
 //		return "Hello hi";
 		//return useridutil.generateUserId();
@@ -34,9 +34,9 @@ public class Controller {
 	}
 	
 	@PostMapping("/login")
-	public String login(@RequestBody Login login) {
+	public Message login(@RequestBody Login login) {
 		
-		return "{ \"msg\":" + "\"" + services.authentication(login) + "\"" + "}";
+		return new Message(services.authentication(login));
 
 	}
 	

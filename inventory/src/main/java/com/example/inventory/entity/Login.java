@@ -28,6 +28,17 @@ public class Login {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public Login(String userId, String password) {
+		super();
+		this.userId = userId;
+		this.password = password;
+	}
+	public Login() {
+		super();
+	}
+	
+	
+	
 	
 
 }
