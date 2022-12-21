@@ -1,11 +1,11 @@
 
 CREATE TABLE `inventory` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `reset_qty` bigint NOT NULL,
-  `available_quantity` bigint NOT NULL,
   `location_number` int NOT NULL,
   `material_id` varchar(255) DEFAULT NULL,
+  `reset_qty` bigint NOT NULL,
   `order_quantity` bigint NOT NULL,
+  `available_quantity` bigint NOT NULL,
   `update_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ;
@@ -21,19 +21,20 @@ CREATE TABLE `orders` (
   `order_id` int NOT NULL AUTO_INCREMENT,
   `local_date` date DEFAULT NULL,
   `local_time` time DEFAULT NULL,
-  `location_number` bigint DEFAULT NULL,
-  `material_number` int DEFAULT NULL,
-  `order_quantity` bigint DEFAULT NULL,
+  `location_number` bigint NOT NULL,
+  `material_id` varchar(255) NOT NULL,
+  `order_quantity` bigint NOT NULL,
   `order_status` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`order_id`)
 ) ;
 
 CREATE TABLE `rest_inventor` (
-  `location_number` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `location_number` int NOT NULL ,
   `reset_qty` bigint NOT NULL,
   `material_id` varchar(255) DEFAULT NULL,
   `reset_date` date DEFAULT NULL,
-  PRIMARY KEY (`location_number`)
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `users` (

@@ -1,6 +1,6 @@
 package com.example.inventory.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,38 +14,39 @@ import lombok.Data;
 @Entity
 @Table
 public class Inventory {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private int locationNumber;
-	private String materialNumber;
-	private long ResetQty;
+	private long locationNumber;
+	private String materialId;
+	private long resetQty;
 	private long orderQuantity;
 	private long availableQuantity;
-	private java.time.LocalDate updateDate;
+	private Date updateDate;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getLocationNumber() {
+	public long getLocationNumber() {
 		return locationNumber;
 	}
-	public void setLocationNumber(int locationNumber) {
+	public void setLocationNumber(long locationNumber) {
 		this.locationNumber = locationNumber;
 	}
 	public String getMaterialNumber() {
-		return materialNumber;
+		return materialId;
 	}
 	public void setMaterialNumber(String materialId) {
-		this.materialNumber = materialId;
+		this.materialId = materialId;
 	}
 	public long getResetQty() {
-		return ResetQty;
+		return resetQty;
 	}
 	public void setResetQty(long resetQty) {
-		ResetQty = resetQty;
+		this.resetQty = resetQty;
 	}
 	public long getOrderQuantity() {
 		return orderQuantity;
@@ -59,19 +60,19 @@ public class Inventory {
 	public void setAvailableQuantity(long availableQuantity) {
 		this.availableQuantity = availableQuantity;
 	}
-	public java.time.LocalDate getUpdateDate() {
+	public Date getUpdateDate() {
 		return updateDate;
 	}
-	public void setUpdateDate(java.time.LocalDate updateDate) {
+	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
 	public Inventory(int id, int locationNumber, String materialId, long resetQty, long orderQuantity,
-			long availableQuantity, LocalDate updateDate) {
+			long availableQuantity, Date updateDate) {
 		super();
 		this.id = id;
 		this.locationNumber = locationNumber;
-		this.materialNumber = materialId;
-		ResetQty = resetQty;
+		this.materialId = materialId;
+		this.resetQty = resetQty;
 		this.orderQuantity = orderQuantity;
 		this.availableQuantity = availableQuantity;
 		this.updateDate = updateDate;
