@@ -21,9 +21,13 @@ public class InventoryValidation {
 	}
 
 	public String validateOrder(long locNum, String materialId, long qty) {
-
-		if (inventoryRepo.findByMaterialIdAndLocationNumber(materialId, locNum).getAvailableQuantity() > qty && qty > 0)
-			return "Order Quantity should be less than avalable Quantity";
+		
+		long availableQuantity = inventoryRepo.findByMaterialIdAndLocationNumber(materialId, locNum).getAvailableQuantity();
+		System.out.println(availableQuantity+" "+qty);
+		 if(qty < 0)
+			 return "Order quantity should be greater than zero";
+			 else if (availableQuantity < qty) return "Order Quantity should be less than avalable Quantity";
+		else
 		return "";
 
 	}

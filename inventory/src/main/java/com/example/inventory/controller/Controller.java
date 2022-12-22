@@ -106,11 +106,17 @@ public class Controller {
 		HttpStatus status;
 		status = HttpStatus.OK;
 		String msg = inventoryValidation.validateOrder(locNum, materialId, qty);
-
+		Orders order = new Orders(
+				new Date(),
+				new Time(100),
+				locNum,
+				materialId,qty,
+				"In-progress"
+				);
+		
 		if (msg.equals("")) {
 
-			RestInventor restInventor = new RestInventor(materialId, qty, locNum, new Date());
-			return new ResponseEntity<>(new Message(services.editInventory(restInventor)), status);
+			return new ResponseEntity<>(new Message(services.acceptOrders(order)), status);
 
 		} else {
 			return new ResponseEntity<>(new Message(msg), HttpStatus.BAD_REQUEST);
